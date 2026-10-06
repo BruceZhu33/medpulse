@@ -2,336 +2,637 @@
   "groups": [
     {
       "key": "company",
-      "name": "公司与模型",
-      "blurb": "按厂商追踪模型、产品与公司动态"
+      "name": "公司与机构",
+      "blurb": "按厂商与监管机构追踪：谁获批了、谁被召回、谁中了标"
     },
     {
       "key": "field",
-      "name": "技术方向",
-      "blurb": "按技术领域深挖：Agent、多模态、具身智能……"
+      "name": "细分领域",
+      "blurb": "按细分赛道深挖：影像、IVD、心血管、手术机器人……"
     },
     {
       "key": "genre",
       "name": "内容形态",
-      "blurb": "按内容类型浏览：论文、教程、观点、政策……"
+      "blurb": "按内容类型浏览：获批、集采、召回、政策、出海……"
     }
   ],
   "topics": [
     {
-      "slug": "openai",
-      "name": "OpenAI / ChatGPT",
+      "slug": "mindray",
+      "name": "迈瑞医疗",
       "group": "company",
-      "entityId": "openai",
-      "definition": "OpenAI 的全部动态：GPT 系列模型、ChatGPT 与 Sora 产品、公司战略与人事的持续追踪。"
-    },
-    {
-      "slug": "anthropic",
-      "name": "Anthropic / Claude",
-      "group": "company",
-      "entityId": "anthropic",
-      "definition": "Anthropic 的全部动态：Claude 系列模型、Claude Code、安全研究路线与公司进展的持续追踪。"
-    },
-    {
-      "slug": "google",
-      "name": "Google / Gemini",
-      "group": "company",
-      "entityId": "google",
-      "aliases": [
-        "DeepMind"
+      "entityId": "mindray",
+      "tags": [
+        "迈瑞医疗",
+        "entity:mindray"
       ],
-      "definition": "Google 与 DeepMind 的 AI 动态：Gemini 系列、Veo 视频模型、研究成果与产品生态的持续追踪。"
+      "definition": "迈瑞医疗的全部动态：监护、影像、IVD 三大产线的注册获批、集采表现、海外扩张与业绩的持续追踪。",
+      "related": [
+        "united-imaging",
+        "monitoring",
+        "going-global"
+      ]
     },
     {
-      "slug": "deepseek",
-      "name": "DeepSeek",
+      "slug": "united-imaging",
+      "name": "联影医疗",
       "group": "company",
-      "entityId": "deepseek",
-      "definition": "DeepSeek（深度求索）的模型发布、开源权重、技术报告与 API 价格变化。"
+      "entityId": "united-imaging",
+      "tags": [
+        "联影医疗",
+        "entity:united-imaging"
+      ],
+      "definition": "联影医疗的动态：高端影像设备的注册获批、关键部件自研、全球装机与业绩进展。",
+      "related": [
+        "imaging",
+        "mindray",
+        "going-global"
+      ]
     },
     {
-      "slug": "qwen",
-      "name": "千问 Qwen",
+      "slug": "microport",
+      "name": "微创医疗",
       "group": "company",
-      "entityId": "qwen",
-      "definition": "阿里千问 Qwen 系列的开源发布与迭代：从旗舰模型到端侧小模型的全谱系动态。"
+      "entityId": "microport",
+      "tags": [
+        "微创医疗",
+        "entity:microport"
+      ],
+      "definition": "微创医疗及关联体系的动态：心血管介入、大外科、机器人等分支的业务重组、获批与集采变化。",
+      "related": [
+        "cardio",
+        "surgical-robot",
+        "industry-news"
+      ]
     },
     {
-      "slug": "kimi",
-      "name": "Kimi / 月之暗面",
+      "slug": "lepu",
+      "name": "乐普医疗",
       "group": "company",
-      "entityId": "kimi",
-      "definition": "月之暗面 Kimi 系列模型与产品动态：K 系列开源模型、长上下文技术与产品演进的追踪。"
+      "entityId": "lepu",
+      "tags": [
+        "entity:lepu"
+      ],
+      "definition": "乐普医疗的动态：心血管耗材的集采应对、创新管线获批与国际化布局。",
+      "related": [
+        "cardio",
+        "procurement",
+        "microport"
+      ]
     },
     {
-      "slug": "minimax",
-      "name": "MiniMax",
+      "slug": "yuyue",
+      "name": "鱼跃医疗",
       "group": "company",
-      "entityId": "minimax",
-      "definition": "MiniMax 的模型与产品动态：M 系列大模型、语音与多模态能力、开源与商业化进展。"
+      "entityId": "yuyue",
+      "tags": [
+        "entity:yuyue"
+      ],
+      "definition": "鱼跃医疗的动态：家用与临床器械的产品获批、呼吸与监测产线扩张、零售渠道变化。",
+      "related": [
+        "home-devices",
+        "monitoring",
+        "mindray"
+      ]
     },
     {
-      "slug": "zhipu",
-      "name": "智谱 GLM",
+      "slug": "medtronic",
+      "name": "美敦力",
       "group": "company",
-      "entityId": "zhipu",
-      "definition": "智谱的 GLM 系列模型动态：旗舰开源发布、代码与推理能力迭代、商业化与生态进展的追踪。"
+      "entityId": "medtronic",
+      "tags": [
+        "美敦力",
+        "entity:medtronic"
+      ],
+      "definition": "美敦力的全部动态：心血管、糖尿病、神经调控与手术机器人的获批、临床与在华策略。",
+      "related": [
+        "cardio",
+        "boston-scientific",
+        "surgical-robot"
+      ]
     },
     {
-      "slug": "xai",
-      "name": "xAI / Grok",
+      "slug": "abbott",
+      "name": "雅培",
       "group": "company",
-      "entityId": "xai",
-      "definition": "马斯克 xAI 与 Grok 系列的全部动态：模型迭代、算力扩张与 X 平台整合的持续追踪。"
+      "entityId": "abbott",
+      "tags": [
+        "雅培",
+        "entity:abbott"
+      ],
+      "definition": "雅培医疗器械与诊断的动态：心血管介入、连续血糖监测、IVD 平台与质量事件的追踪。",
+      "related": [
+        "cardio",
+        "ivd",
+        "medtronic"
+      ]
     },
     {
-      "slug": "meta",
-      "name": "Meta / Llama",
+      "slug": "jnj-medtech",
+      "name": "强生医疗",
       "group": "company",
-      "entityId": "meta",
-      "definition": "Meta 的 AI 动态：Llama 与 Muse 系列模型、超级智能实验室与 Meta AI 产品。"
+      "entityId": "jnj",
+      "tags": [
+        "强生",
+        "entity:jnj"
+      ],
+      "definition": "强生医疗科技（MedTech）的动态：外科、骨科、介入的获批与并购、诉讼及业务分拆。",
+      "related": [
+        "boston-scientific",
+        "medtronic",
+        "industry-news"
+      ]
     },
     {
-      "slug": "microsoft",
-      "name": "Microsoft / Copilot",
+      "slug": "boston-scientific",
+      "name": "波士顿科学",
       "group": "company",
-      "entityId": "microsoft",
-      "definition": "微软的 AI 布局：Copilot 全家桶、Azure AI 基础设施与 OpenAI 合作关系的持续追踪。"
+      "entityId": "boston-scientific",
+      "tags": [
+        "波士顿科学",
+        "entity:boston-scientific"
+      ],
+      "definition": "波士顿科学的动态：电生理与介入产品的获批、临床数据、收购整合与召回事件。",
+      "related": [
+        "cardio",
+        "jnj-medtech",
+        "medtronic"
+      ]
     },
     {
-      "slug": "nvidia",
-      "name": "NVIDIA 英伟达",
+      "slug": "siemens-healthineers",
+      "name": "西门子医疗",
       "group": "company",
-      "entityId": "nvidia",
-      "definition": "英伟达的 AI 芯片与生态动态：GPU 新品、CUDA 生态、机器人平台与 AI 算力市场的风向。"
+      "entityId": "siemens-healthineers",
+      "tags": [
+        "西门子医疗",
+        "entity:siemens-healthineers"
+      ],
+      "definition": "西门子医疗的动态：影像与实验室诊断的装机与获批、AI 软件布局与业绩变化。",
+      "related": [
+        "imaging",
+        "ge-healthcare",
+        "ivd"
+      ]
     },
     {
-      "slug": "hugging-face",
-      "name": "Hugging Face",
+      "slug": "ge-healthcare",
+      "name": "GE 医疗",
       "group": "company",
-      "entityId": "hugging-face",
-      "definition": "Hugging Face 开源社区动态：热门模型与数据集、排行榜变化与开源生态的晴雨表。"
+      "entityId": "ge-healthcare",
+      "tags": [
+        "GE医疗",
+        "entity:ge-healthcare"
+      ],
+      "definition": "GE 医疗的动态：影像与超声产品线、AI 应用获批、独立上市后的战略与业绩追踪。",
+      "related": [
+        "imaging",
+        "siemens-healthineers",
+        "philips"
+      ]
     },
     {
-      "slug": "cursor",
-      "name": "Cursor",
+      "slug": "philips",
+      "name": "飞利浦医疗",
       "group": "company",
-      "entityId": "cursor",
-      "definition": "Cursor（Anysphere）的编辑器与编码 Agent 动态：产品迭代、自研模型与定价变化。"
+      "entityId": "philips",
+      "tags": [
+        "entity:philips"
+      ],
+      "definition": "飞利浦医疗的动态：影像与监护产线、呼吸设备召回的后续进展、健康科技战略调整。",
+      "related": [
+        "imaging",
+        "recalls-safety",
+        "ge-healthcare"
+      ]
     },
     {
-      "slug": "openrouter",
-      "name": "OpenRouter",
+      "slug": "roche-diagnostics",
+      "name": "罗氏诊断",
       "group": "company",
-      "entityId": "openrouter",
-      "definition": "OpenRouter 模型路由平台动态：新模型上架、用量排行与开发者选型的真实市场信号。"
+      "entityId": "roche-diagnostics",
+      "tags": [
+        "罗氏诊断",
+        "entity:roche-diagnostics"
+      ],
+      "definition": "罗氏诊断的动态：免疫与分子诊断平台、伴随诊断合作、IVD 市场策略与在华注册。",
+      "related": [
+        "ivd",
+        "molecular-dx",
+        "abbott"
+      ]
     },
     {
-      "slug": "agent",
-      "name": "Agent 智能体",
+      "slug": "nmpa",
+      "name": "国家药监局",
+      "group": "company",
+      "entityId": "nmpa",
+      "tags": [
+        "NMPA",
+        "entity:nmpa"
+      ],
+      "definition": "国家药监局器械监管动态：注册批准公告、飞行检查通报、法规规章发布、分类目录调整。",
+      "related": [
+        "cmde",
+        "fda",
+        "regulatory-practice"
+      ]
+    },
+    {
+      "slug": "cmde",
+      "name": "器审中心",
+      "group": "company",
+      "entityId": "cmde",
+      "tags": [
+        "entity:cmde"
+      ],
+      "definition": "器审中心（CMDE）的动态：审评公示、创新与优先通道、指导原则制修订与沟通政策。",
+      "related": [
+        "nmpa",
+        "approvals",
+        "regulatory-practice"
+      ]
+    },
+    {
+      "slug": "nhsa",
+      "name": "国家医保局",
+      "group": "company",
+      "entityId": "nhsa",
+      "tags": [
+        "entity:nhsa"
+      ],
+      "definition": "国家医保局的动态：高值耗材集采开标与接续、医保支付政策、价格治理与招标规则变化。",
+      "related": [
+        "procurement",
+        "nmpa",
+        "policy-regulation"
+      ]
+    },
+    {
+      "slug": "fda",
+      "name": "美国 FDA",
+      "group": "company",
+      "entityId": "fda",
+      "tags": [
+        "FDA",
+        "entity:fda"
+      ],
+      "definition": "FDA 器械与放射健康中心（CDRH）的动态：获批与清理、召回与警告信、数字健康政策与用户费法案。",
+      "related": [
+        "approvals",
+        "recalls-safety",
+        "nmpa"
+      ]
+    },
+    {
+      "slug": "imaging",
+      "name": "影像与超声",
       "group": "field",
       "tags": [
-        "Agent"
+        "影像与超声"
       ],
-      "definition": "让模型自主规划、调用工具、完成多步任务的技术方向——从 Claude Code、Manus 到各家 Agent 框架与评测基准的全部动态。"
+      "definition": "医学影像赛道：CT、MRI、超声、分子影像的设备获批、AI 辅助诊断软件与装机市场动态。",
+      "related": [
+        "ai-medical",
+        "united-imaging",
+        "ge-healthcare"
+      ]
     },
     {
-      "slug": "coding",
-      "name": "AI 编码",
+      "slug": "ivd",
+      "name": "IVD 体外诊断",
       "group": "field",
       "tags": [
-        "编码"
+        "IVD/体外诊断"
       ],
-      "definition": "AI 写代码的一切：编码助手、Vibe Coding、代码模型评测与开发工作流变革。"
+      "definition": "体外诊断赛道：免疫、生化、分子、POCT 平台的注册获批、集采降价与检测市场变化。",
+      "related": [
+        "molecular-dx",
+        "roche-diagnostics",
+        "procurement"
+      ]
     },
     {
-      "slug": "reasoning",
-      "name": "推理能力",
+      "slug": "cardio",
+      "name": "心血管与介入",
       "group": "field",
       "tags": [
-        "推理"
+        "心血管与介入"
       ],
-      "definition": "模型推理能力的进展：思维链、推理模型、数学与逻辑基准的突破与争议。"
+      "definition": "心血管与外周介入赛道：支架、瓣膜、电生理、封堵器的获批、临床结果与集采变化。",
+      "related": [
+        "microport",
+        "medtronic",
+        "research-clinical"
+      ]
     },
     {
-      "slug": "multimodal",
-      "name": "多模态",
+      "slug": "ortho",
+      "name": "骨科与植入",
       "group": "field",
       "tags": [
-        "多模态"
+        "骨科与植入"
       ],
-      "definition": "文本之外的能力：视觉理解、图文混合、音视频输入输出的模型与产品进展。"
+      "definition": "骨科与植入物赛道：关节、脊柱、创伤、运动医学的集采接续、创新植入物获批与材料进展。",
+      "related": [
+        "procurement",
+        "jnj-medtech",
+        "components"
+      ]
     },
     {
-      "slug": "image-gen",
-      "name": "图像生成",
+      "slug": "surgical-robot",
+      "name": "手术机器人",
       "group": "field",
       "tags": [
-        "图像生成"
+        "手术机器人"
       ],
-      "definition": "AI 画图的最前线：文生图模型迭代、图像编辑能力与创作工具生态的全部动态。"
+      "definition": "手术机器人赛道：腔镜、骨科、穿刺介入机器人的注册获批、临床落地与医保收费定价。",
+      "related": [
+        "ai-medical",
+        "medtronic",
+        "procurement"
+      ]
     },
     {
-      "slug": "video",
-      "name": "AI 视频",
+      "slug": "ai-medical",
+      "name": "AI 医疗 / SaMD",
       "group": "field",
       "tags": [
-        "视频"
+        "AI医疗/SaMD"
       ],
-      "definition": "AI 视频生成与理解：文生视频模型、视频编辑工具与影视创作变革的追踪。"
+      "definition": "医疗器械软件与 AI 医疗：SaMD 获批路径、算法更新监管、AI 辅助诊断与手术规划的应用进展。",
+      "related": [
+        "imaging",
+        "surgical-robot",
+        "regulatory-practice"
+      ]
     },
     {
-      "slug": "voice",
-      "name": "语音与音频",
+      "slug": "home-devices",
+      "name": "家用器械",
       "group": "field",
       "tags": [
-        "语音"
+        "家用器械"
       ],
-      "definition": "AI 语音与音频的进展：语音合成、实时对话、音乐生成与音频理解的模型与产品。"
+      "definition": "家用器械赛道：血压、血糖、呼吸、康复设备的消费化、零售渠道与线上销售监管动态。",
+      "related": [
+        "yuyue",
+        "monitoring",
+        "products-tech"
+      ]
     },
     {
-      "slug": "embodied",
-      "name": "具身智能",
+      "slug": "ophthalmology",
+      "name": "眼科",
       "group": "field",
       "tags": [
-        "具身智能"
+        "眼科"
       ],
-      "definition": "AI 走进物理世界：人形机器人、具身基础模型与真实环境操作能力的进展追踪。"
+      "definition": "眼科器械赛道：人工晶体与角膜塑形集采、眼科设备获批、屈光手术技术的动态。",
+      "related": [
+        "procurement",
+        "ortho",
+        "products-tech"
+      ]
     },
     {
-      "slug": "on-device",
-      "name": "端侧 AI",
+      "slug": "dental",
+      "name": "口腔",
       "group": "field",
       "tags": [
-        "端侧"
+        "口腔"
       ],
-      "definition": "跑在手机、电脑与边缘设备上的 AI：小模型、本地推理与端侧芯片的进展。"
+      "definition": "口腔器械赛道：种植体集采、隐形正畸、口扫与 CAD/CAM 设备的注册与市场动态。",
+      "related": [
+        "procurement",
+        "home-devices",
+        "products-tech"
+      ]
     },
     {
-      "slug": "open-source",
-      "name": "开源生态",
+      "slug": "endoscopy",
+      "name": "内窥镜",
       "group": "field",
       "tags": [
-        "开源生态",
-        "开源/仓库"
+        "内窥镜"
       ],
-      "definition": "开源模型、框架与仓库动态：权重开放、社区项目爆火、开源与闭源的力量消长。"
+      "definition": "内窥镜赛道：软镜硬镜的国产化进展、一次性内镜、胶囊内镜的获批与临床应用。",
+      "related": [
+        "imaging",
+        "components",
+        "going-global"
+      ]
     },
     {
-      "slug": "engineering",
-      "name": "部署工程",
+      "slug": "monitoring",
+      "name": "监护与麻醉",
       "group": "field",
       "tags": [
-        "部署/工程"
+        "监护与麻醉"
       ],
-      "definition": "把模型跑起来的工程实践：推理优化、显存与成本、Serving 架构与基础设施选型。"
+      "definition": "监护与麻醉赛道：病人监护、麻醉机、呼吸机的产品迭代、标准更新与医院采购动态。",
+      "related": [
+        "mindray",
+        "yuyue",
+        "home-devices"
+      ]
     },
     {
-      "slug": "data-training",
-      "name": "数据与训练",
+      "slug": "rehabilitation",
+      "name": "康复",
       "group": "field",
       "tags": [
-        "数据/训练"
+        "康复"
       ],
-      "definition": "训练侧的门道：数据集构建、合成数据、预训练与后训练方法、算力与训练成本。"
+      "definition": "康复器械赛道：康复机器人、物理治疗设备、辅助器具的支付政策与产品创新。",
+      "related": [
+        "home-devices",
+        "procurement",
+        "surgical-robot"
+      ]
     },
     {
-      "slug": "safety",
-      "name": "安全对齐",
+      "slug": "molecular-dx",
+      "name": "分子诊断 / 基因",
       "group": "field",
       "tags": [
-        "安全/对齐"
+        "分子诊断/基因"
       ],
-      "definition": "AI 安全与对齐：越狱与防御、模型行为研究、安全评测与治理框架的进展。"
+      "definition": "分子诊断与基因检测赛道：PCR、NGS、伴随诊断的注册审批、LDT 政策与实验室自测监管。",
+      "related": [
+        "ivd",
+        "roche-diagnostics",
+        "policy-regulation"
+      ]
     },
     {
-      "slug": "mcp",
-      "name": "MCP 与工具调用",
+      "slug": "components",
+      "name": "核心零部件",
       "group": "field",
       "tags": [
-        "MCP/工具调用"
+        "核心零部件"
       ],
-      "definition": "模型连接外部世界的协议与实践：MCP 生态、function calling、工具链集成的动态。"
+      "definition": "上游核心部件赛道：球管、探测器、传感器、原材料供应链的国产替代与出口管制动态。",
+      "related": [
+        "imaging",
+        "cdmo",
+        "going-global"
+      ]
     },
     {
-      "slug": "model-releases",
-      "name": "模型发布",
+      "slug": "cdmo",
+      "name": "CDMO / 代工",
+      "group": "field",
+      "tags": [
+        "CDMO/代工"
+      ],
+      "definition": "医疗器械 CDMO 与代工赛道：注册人制度下的受托生产、产能扩张与质量合规动态。",
+      "related": [
+        "components",
+        "regulatory-practice",
+        "industry-news"
+      ]
+    },
+    {
+      "slug": "approvals",
+      "name": "注册获批",
       "group": "genre",
       "tags": [
-        "模型发布"
+        "注册获批"
       ],
-      "definition": "新模型的发布、开源与迭代：大模型厂商的旗舰更新、开源权重放出、性能与价格变化的第一时间记录。"
+      "definition": "获批与审评的第一时间记录：创新械获批、首例上市、FDA 与 CE 的关键批准、审评进度公示。",
+      "related": [
+        "policy-regulation",
+        "fda",
+        "products-tech"
+      ]
     },
     {
-      "slug": "product-updates",
-      "name": "产品更新",
+      "slug": "policy-regulation",
+      "name": "政策法规",
       "group": "genre",
       "tags": [
-        "产品更新"
+        "政策/法规"
       ],
-      "definition": "AI 产品与应用的功能上新、改版与商业化动态——谁家的产品变强了、变贵了、能用了。"
+      "definition": "法规与标准的动态：注册办法修订、分类目录调整、指导原则定稿、全球监管协调进展。",
+      "related": [
+        "approvals",
+        "nmpa",
+        "regulatory-practice"
+      ]
     },
     {
-      "slug": "papers",
-      "name": "论文研究",
+      "slug": "procurement",
+      "name": "集采与医保",
       "group": "genre",
       "tags": [
-        "论文/研究"
+        "集采/医保"
       ],
-      "definition": "值得读的 AI 论文与研究成果：架构创新、训练方法、能力测量与理论进展的精选解读。"
+      "definition": "集采与支付的商业脉搏：开标结果与降幅、接续规则、医保支付范围、价格治理。",
+      "related": [
+        "nhsa",
+        "policy-regulation",
+        "industry-news"
+      ]
     },
     {
-      "slug": "benchmarks",
-      "name": "评测基准",
+      "slug": "recalls-safety",
+      "name": "质量安全",
       "group": "genre",
       "tags": [
-        "评测/基准"
+        "召回/质量安全"
       ],
-      "definition": "模型到底谁强：Benchmark 成绩、评测方法论争议与排行榜变化的持续记录。"
+      "definition": "质量与安全事件簿：一级召回、飞行检查通报、警告信、不良事件与警戒信息。",
+      "related": [
+        "fda",
+        "nmpa",
+        "policy-regulation"
+      ]
     },
     {
-      "slug": "tutorials",
-      "name": "教程实践",
-      "group": "genre",
-      "tags": [
-        "教程/实践"
-      ],
-      "definition": "拿来就能用的实操内容：提示词技巧、工作流搭建、工具用法与踩坑经验。"
-    },
-    {
-      "slug": "opinions",
-      "name": "大佬观点",
-      "group": "genre",
-      "tags": [
-        "大佬观点"
-      ],
-      "definition": "行业关键人物在想什么：创始人访谈、研究者论战、投资人判断的观点集合。"
-    },
-    {
-      "slug": "trends",
-      "name": "现象与趋势",
-      "group": "genre",
-      "tags": [
-        "现象/趋势"
-      ],
-      "definition": "正在发生的行业级变化：使用习惯迁移、能力涌现、社会影响与市场格局的观察。"
-    },
-    {
-      "slug": "industry",
+      "slug": "industry-news",
       "name": "行业动态",
       "group": "genre",
       "tags": [
         "行业动态"
       ],
-      "definition": "AI 行业的商业脉搏：融资并购、人事变动、合作与竞争、政策与市场信号。"
+      "definition": "行业的商业脉搏：投融资并购、人事变动、业绩与产能、合作与竞争格局。",
+      "related": [
+        "going-global",
+        "opinions",
+        "procurement"
+      ]
     },
     {
-      "slug": "policy",
-      "name": "政策监管",
+      "slug": "products-tech",
+      "name": "产品技术",
       "group": "genre",
       "tags": [
-        "政策/监管"
+        "产品/技术"
       ],
-      "definition": "AI 相关政策法规与政府监管动态：立法进展、出口管制与全球治理框架的追踪。"
+      "definition": "新产品与新技术的发布记录：产品上市、重大升级、技术平台与临床应用扩展。",
+      "related": [
+        "approvals",
+        "ai-medical",
+        "research-clinical"
+      ]
+    },
+    {
+      "slug": "research-clinical",
+      "name": "临床研究",
+      "group": "genre",
+      "tags": [
+        "临床/研究"
+      ],
+      "definition": "临床与研究证据：关键试验结果、真实世界研究、改变术式与适应症的科学进展。",
+      "related": [
+        "products-tech",
+        "cardio",
+        "opinions"
+      ]
+    },
+    {
+      "slug": "opinions",
+      "name": "观点解读",
+      "group": "genre",
+      "tags": [
+        "观点/解读"
+      ],
+      "definition": "从业者怎么看：政策解读、市场判断、行业复盘与访谈的观点集合。",
+      "related": [
+        "policy-regulation",
+        "industry-news",
+        "research-clinical"
+      ]
+    },
+    {
+      "slug": "going-global",
+      "name": "出海全球化",
+      "group": "genre",
+      "tags": [
+        "出海/全球化"
+      ],
+      "definition": "出海进行时：国产械企的 FDA/CE 注册、海外建厂、国际招投标与当地准入动态。",
+      "related": [
+        "approvals",
+        "industry-news",
+        "mindray"
+      ]
+    },
+    {
+      "slug": "regulatory-practice",
+      "name": "法规实务",
+      "group": "genre",
+      "tags": [
+        "法规实务"
+      ],
+      "definition": "拿来就能用的实务内容：注册资料准备、体系考核应对、UDI 实施、申报策略与踩坑经验。",
+      "related": [
+        "policy-regulation",
+        "approvals",
+        "cmde"
+      ]
     }
   ]
 }

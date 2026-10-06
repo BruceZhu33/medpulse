@@ -10,17 +10,17 @@
 
 `itemType` 必须七选一：
 
-- `model_release`：新模型或大版本更新
-- `product_launch`：新产品、工具或重大功能更新
-- `tool_or_prompt`：可直接复用的方法、Prompt、Skill 或技巧
-- `research_paper`：论文、研究或技术报告
-- `industry_event`：融资、收购、监管、诉讼、商业动作或人事
-- `opinion_analysis`：观点、行业判断、复盘或长访谈
-- `tutorial_explainer`：教程、科普、解读或评测
+- `regulatory_approval`：注册获批、审评审批、创新通道、优先审批、注册法规落地
+- `policy_payment`：法规规章、指导原则、标准、分类目录、集采、医保支付与定价政策
+- `recall_quality`：召回、飞行检查、警告信、监管处罚、不良事件与警戒
+- `product_tech`：新产品与新技术发布、重大产品更新、AI 医疗软件与平台进展
+- `clinical_research`：临床试验结果、真实世界研究、学术研究与技术报告
+- `industry_event`：投融资、并购、人事、合作、业绩、产能与出海的商业动作
+- `opinion_analysis`：观点、政策解读、市场分析、访谈，以及法规实务与实操指南
 
-优先级：发了模型选 model_release；发了工具选 product_launch；发了 Prompt 或方法选 tool_or_prompt；论文优先 research_paper；评测选 tutorial_explainer。
+优先级：获批或审评进展选 regulatory_approval；集采和法规政策选 policy_payment；召回与检查选 recall_quality；发了新产品选 product_tech；临床试验与研究结果优先 clinical_research。
 
-输出前检查 `itemType` 与第一个分类标签是否自洽：`model_release` 对应“模型发布”，`product_launch` 对应“产品更新”，`research_paper` 对应“论文/研究”，`industry_event` 对应“行业动态”或“政策/监管”，`opinion_analysis` 对应“大佬观点”或“现象/趋势”，`tutorial_explainer` 对应“教程/实践”或“评测/基准”。如果二者冲突，按当前材料的核心事件修正后再输出。
+输出前检查 `itemType` 与第一个分类标签是否自洽：`regulatory_approval` 对应“注册获批”，`policy_payment` 对应“政策/法规”或“集采/医保”，`recall_quality` 对应“召回/质量安全”，`product_tech` 对应“产品/技术”，`clinical_research` 对应“临床/研究”，`industry_event` 对应“行业动态”或“出海/全球化”，`opinion_analysis` 对应“观点/解读”或“法规实务”。如果二者冲突，按当前材料的核心事件修正后再输出。
 
 ## 作者角色
 
@@ -32,14 +32,14 @@
 
 ## 标签
 
-`tags` 输出 1–6 个字符串。第一个必须从以下分类标签中选一个：模型发布、产品更新、开源/仓库、论文/研究、教程/实践、大佬观点、评测/基准、安全/对齐、现象/趋势、行业动态、政策/监管、非AI/通用工具、其他。
+`tags` 输出 1–6 个字符串。第一个必须从以下分类标签中选一个：注册获批、政策/法规、集采/医保、召回/质量安全、行业动态、产品/技术、临床/研究、观点/解读、出海/全球化、法规实务、展会/活动、非医械内容、其他。
 
 其后可选 0–5 个适用标签，并且只能来自以下两个白名单：
 
-- 主题：Agent、编码、推理、多模态、语音、视频、图像生成、RAG、端侧、数据/训练、搜索、部署/工程、开源生态、具身智能、MCP/工具调用
-- 实体：OpenAI、Anthropic、DeepSeek、DeepMind、Google、Meta、Microsoft、xAI、Hugging Face、GitHub、arXiv
+- 主题：影像与超声、IVD/体外诊断、心血管与介入、骨科与植入、手术机器人、AI医疗/SaMD、家用器械、眼科、口腔、内窥镜、监护与麻醉、康复、分子诊断/基因、核心零部件、CDMO/代工
+- 实体：迈瑞医疗、联影医疗、微创医疗、美敦力、雅培、强生、西门子医疗、GE医疗、波士顿科学、罗氏诊断、NMPA、FDA
 
-正文中即使明确出现了 NVIDIA、Apple、阿里等其他实体，也不要把它们放进 `tags`。不要创造白名单之外的标签。没有适用的主题或实体时，只返回第一个分类标签；例如学校限制 AI 使用的监管新闻，不需要强行归到“编码”或“推理”。
+正文中即使明确出现了乐普、鱼跃、史赛克、赛默飞、丹纳赫、器审中心、医保局等其他实体，也不要把它们放进 `tags`。不要创造白名单之外的标签。没有适用的主题或实体时，只返回第一个分类标签；例如影像设备的注册获批新闻，不需要强行归到“家用器械”或“康复”。
 
 ## 候选阅读价值
 
@@ -59,4 +59,4 @@
 
 只返回合法 JSON，不要 Markdown，不要解释。顶层必须且只能包含以下六个字段：
 
-{"itemType":"product_launch","authorRole":"principal","tags":["产品更新","Agent"],"editorialJudgment":"原文给出了能力变化和开放入口，读者可以据此判断它会怎样改变现有工作流。","titleZh":"某产品发布智能体功能","summaryZh":"某产品发布新的智能体功能，给出了开放入口和主要能力变化。"}
+{"itemType":"regulatory_approval","authorRole":"principal","tags":["注册获批","NMPA"],"editorialJudgment":"原文给出了获批产品的类别和创新属性，读者可以据此判断它对现有注册格局的影响。","titleZh":"某三类器械获批上市","summaryZh":"国家药监局批准某三类医疗器械注册，给出了适用范围和创新审查属性。"}

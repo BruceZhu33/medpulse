@@ -1,45 +1,47 @@
 
-【AI 领域翻译规则 — 本平台 100% 是 AI/ML/LLM 行业内容，严格遵守】
+【医疗器械领域翻译规则 — 本平台 100% 是医疗器械/IVD 行业内容，严格遵守】
 
-1. 歧义默认值：以下词在中文有非 AI 歧义，**一律按 AI 含义翻译**：
-   - LLM = 大语言模型（绝不译"法学硕士"/"Master of Laws"）
-   - Token / tokens = 模型 token（保留英文；绝不译"代币"/"令牌"）
-   - Transformer = Transformer 架构（保留英文；不译"变压器"）
-   - Diffusion = 扩散模型（AI 生成，不是物理扩散）
-   - Agent / Agentic = AI 智能体 / 智能体的（不译"代理人"/"中介"）
-   - Alignment = 对齐（AI 安全语境）
-   - Inference = 推理（模型生成）
-   - Reasoning = 推理（注意：与 inference 都译"推理"，必要时用"链式推理"区分 CoT；reasoning model 指 o1/o3/R1 这类思考型模型）
-   - Embedding = 嵌入向量（也可保留英文）
-   - Distillation = 知识蒸馏
-   - Hallucination = 模型幻觉
-   - Fine-tune / Fine-tuning = 微调
-   - Pretrain / Pretraining = 预训练
-   - Context window = 上下文窗口
-   - Prompt = 提示词
-   - Skill / Skills = 技能（Claude 等 Agent 框架的能力包，不译"特长"）
+1. 歧义默认值：以下词在中文有歧义，**一律按医疗器械含义翻译**：
+   - Device = 医疗器械（语境是器械行业时绝不译"设备""装置"等泛称）
+   - Recall = 召回（器械安全语境，不译"回忆""撤回"）
+   - Clearance / cleared = 510(k) 获准（注意与"批准"区分，见下）
+   - Approval / approved = 注册批准（PMA、NMPA 注册等正式批准）
+   - Class I / II / III = 按上下文区分两种含义：器械风险分类（Class III 高风险）与召回级别（Class I 最严重）；翻译时写明"器械分类 III 类"或"一级召回"避免混淆
+   - Predicate = 对比器械（510(k) 等同性声明中的参照器械）
+   - Breakthrough Device = 突破性设备（FDA 快速通道，不译"突破性设备公司"等其他含义）
+   - Notified Body = 公告机构（欧盟认证机构）
+   - MDR = 欧盟医疗器械法规（EU MDR，不译"医疗数据报告"等其他含义）
+   - IVD / IVDR = 体外诊断 / 体外诊断法规（保留缩写）
+   - SaMD = 医疗器械软件（SaMD）
+   - Adverse event = 不良事件
+   - Warning letter = 警告信（FDA 执法文书）
+   - Import alert = 进口警示
+   - Tender = 招标（采购语境，不译"投标价格"单数含义时注意语序）
+   - VBP（volume-based procurement）= 带量采购
+   - Reimbursement = 医保支付（中国语境）/ 报销（按语境）
+   - Companion diagnostic = 伴随诊断
+   - Labeling / label = 标签与说明书（法规语境，不译"贴标签"）
+   - Submission = 申报（注册语境，不译"提交"泛称）
+   - Sponsor = 申办方（临床试验语境）
 
 2. 以下专有名词**一律保留英文原文**，不翻译不加中文括注：
-   - AI 公司：OpenAI / Anthropic / Google DeepMind / xAI / Meta AI / Mistral / DeepSeek / Cohere / HuggingFace（HF）/ Runway / ElevenLabs / Suno / Pika / Midjourney / Perplexity
-   - 模型族（举例 + 通用规则）：GPT / Claude / Gemini / Llama / Qwen / Grok / o 系列 / DeepSeek / Mistral / Mixtral / Phi / Sora / Veo / Imagen
-     **规则**：任何大模型族名、产品代号一律保留英文
-   - 模型版本号（举例 + 通用规则）：GPT-5 / Claude 4.7 / Claude Sonnet 4.6 / Llama 4 / Gemini 3 / o3 / o4 / DeepSeek-V4 / Qwen3.7
-     **规则**：版本号一字不改（包括字母数字后缀如 4o / 4.7 / 405B / V4 / R1），绝不"翻译性扩写"（不要把 "405B" 译成 "4050 亿"，不要把 "V4" 译成 "第 4 代"）
-   - 技术缩写（举例 + 通用规则）：LLM / RAG / RLHF / DPO / LoRA / QLoRA / PEFT / MoE / CoT / ReAct / KV cache / SOTA / AGI / MCP / ADK / NPU / GPU / TPU
-     **规则**：任何 2-5 字母的全大写缩写，默认按 AI/ML 含义保留英文
-   - 评测基准（举例 + 通用规则）：MMLU / GPQA / HumanEval / SWE-bench / SWE-bench Verified / AIME / HLE / ARC-AGI / ARC-AGI 2 / MT-Bench / Chatbot Arena / Aider Polyglot / LiveCodeBench
-     **规则**：以 -bench / -eval 结尾或全大写的评测名一律保留英文
-   - AI 工具/产品：Cursor / Copilot / Codex / Aider / Devin / Cline / Claude Code / Windsurf / Zed / v0 / Bolt / Lovable / Replit Agent
-   - Agent 框架：LangChain / LangGraph / LlamaIndex / CrewAI / AutoGen / Pydantic AI / Vercel AI SDK / DSPy
-   - 推理/部署：Ollama / vLLM / SGLang / TensorRT / Triton / CUDA / ROCm
-   - 通用技术：API / SDK / CLI / IDE / SaaS / CDN / SSO / OAuth / JWT / WebSocket / SSE / gRPC
+   - 监管机构与法规：NMPA / FDA / CDRH / CMDE / MHRA / PMDA / TGA / EU MDR / EU IVDR / IMDRF / EUDAMED
+   - 注册路径与程序：510(k)（写法一字不改，含括号）/ PMA / De Novo / HDE / IDE / Breakthrough Device Program / CE mark / eSTAR / MDSAP
+   - 技术缩写（举例 + 通用规则）：IVD / SaMD / AI-SaMD / UDI / GSPR / ISO 13485 / ISO 14971 / IEC 60601 / NGS / PCR / POCT / CT / MRI / PET-CT / CADe / CADx
+     **规则**：任何 2-5 字母的全大写缩写，默认按医疗器械含义保留英文
+   - 国际厂商：Medtronic / Abbott / Johnson & Johnson / Stryker / Boston Scientific / Edwards Lifesciences / Siemens Healthineers / GE HealthCare / Philips / Roche / Danaher / Thermo Fisher / BD / Intuitive Surgical / B. Braun / Olympus / Hologic / QuidelOrtho / Bio-Rad
+   - 代表性产品线（举例 + 通用规则）：Da Vinci（达芬奇手术机器人可双标一次）/ WATCHMAN / FreeStyle Libre / SAPIEN / CoreValve / Magneto / calmer
+     **规则**：产品商标名一律保留英文原文；广为人知的中文惯用名（达芬奇）首次出现可双标
+   - 通用技术：API / SDK / SaaS / AI / ML / CDN / SSO
 
-3. 中国厂商**优先用官方中文品牌名**（首次出现可双标"千问（Qwen3）"，后续选一种保持一致）：
-   - 千问（Qwen）/ 文心一言 / 智谱（GLM）/ 月之暗面（Kimi）/ 深度求索（DeepSeek）/ 阶跃星辰（Step）/ 零一万物（Yi）/ 百川 / 豆包（字节）/ 混元（腾讯）/ 可灵（Kling，快手）/ 即梦（Jimeng，字节）/ MiniMax（不译）/ 美团 LongCat / 昆仑万维 Skywork / 面壁 MiniCPM / 华为昇腾 / 寒武纪
+3. 中国机构与企业**优先用官方中文名**（首次出现可双标"国家药监局（NMPA）"，后续选一种保持一致）：
+   - 国家药监局（NMPA）/ 器审中心（CMDE）/ 标管中心 / 中检院 / 国家医保局 / 各省药监局（如"广东省药监局"）
+   - 迈瑞 / 联影 / 微创医疗 / 乐普医疗 / 鱼跃医疗 / 威高 / 万东 / 澳华 / 开立 / 新产业 / 安图生物 / 迈克生物 / 华大基因 / 迪安诊断 / 金域医学 / 之江生物 / 圣湘生物 / 联影智能 / 微创机器人 / 天智航 / 健帆 / 佰仁 / 惠泰 / 赛诺医疗
+   - 规则：中文企业名不翻译成拼音或英文；港股上市公司用其官方简称
 
 4. 代码 / 命令 / URL / 数字单位 **一字不改**保留：
    - 反引号代码 `code` 不翻译
-   - 命令如 /code-review、pip install、npm run 不译（不要译"代码审查"）
+   - 注册证号、510(k) 编号（如 K243456）、召回编号、标准号（如 YY 0505-2012、ISO 13485:2016）原样保留
    - URL 原样
-   - 数字+单位：8k context / 175B params / 3.5x speedup / $3 per M tokens / 99.9%
-   - 金额、参数量、比例、区间必须保留原文的阿拉伯数字和单位；不要把 $10B-$100B 改写成“数百亿至数千亿美元”等中文数量词
+   - 数字+单位：降幅 78% / 中选价 ¥1,234 / 集采到期接续 / 3 Tesla / 128-slice CT / 99.9%
+   - 金额、降幅比例、样本量、随访时长、灵敏度特异性必须保留原文的阿拉伯数字和单位；不要把 "78%" 改写成"近八成"，不要把 "$2.5B" 改写成"数十亿美元"等中文数量词

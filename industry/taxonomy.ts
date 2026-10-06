@@ -1,4 +1,4 @@
-// 这个行业的分类体系：类别、标签词表、公司（主体）名录，以及防止张冠李戴的身份词典。
+// 这个行业的分类体系：类别、标签词表、公司与机构（主体）名录，以及防止张冠李戴的身份词典。
 // 模型按这里的词表打标签，主题页（topics.json）按标签归类，筛选栏按类别分组。
 // 换行业时：类别的 key 会出现在网址里（/all?category=…），上线后就不要再改；标签和名录可以随时增减。
 
@@ -6,17 +6,18 @@
  * 网页上的类别（筛选栏、卡片角标、RSS 分类订阅）。key 是网址和接口里的身份，上线后不要改。
  * section 是日报里的分节标题（几个类别可以共用一节，按这里的顺序排）；guide 告诉结构抽取模型这一类收什么、
  * 和相邻类别的边界在哪（总的归类原则写在 prompts/structure.md 里）。
- * commentary 标出评论类（教程、观点）：日报写过的事又有评论类的后续报道，只占一行快讯（报道它的信源够多时除外）。
+ * commentary 标出评论类（观点、解读）：日报写过的事又有评论类的后续报道，只占一行快讯（报道它的信源够多时除外）。
  * 没归上类的资料在日报里放进第一个 key 为 industry 的类别所在的节（没有就放最后一节）。
- * feedLabel 是分类 RSS 标题里的名字（不写就用 label）。公开接口、RSS 和 MCP 里要把一类并进另一类发布，写在站点设置里（site/site.ts 的 PUBLIC_CATEGORIES）。
  */
 export const CATEGORIES = [
-  { key: "ai-models", label: "模型", feedLabel: "AI 模型", section: "模型发布/更新", guide: "模型本身的发布、版本、权重开放、能力或价格变化，以及既有榜单上的模型成绩。公布一次跑分不是发布新基准，也不是教程。" },
-  { key: "ai-products", label: "产品", feedLabel: "AI 产品", section: "产品发布/更新", guide: "可使用的 AI 产品、功能、应用、工具、API、平台和工程组件的发布更新。模型厂商发布的推理框架、算子库、硬件适配组件仍是产品，不能因为厂商名归成模型。" },
-  { key: "industry", label: "行业", feedLabel: "行业动态", section: "行业动态", guide: "已发生的公司经营、融资并购、人事、合作、诉讼、政策、真实安全事故及调查进展。新闻由当事人发帖、带有态度，也不因此变成观点。" },
-  { key: "paper", label: "论文", feedLabel: "论文", section: "论文研究", guide: "以新研究方法、实验设计与发现为核心的论文、技术报告、新基准或研究数据集。系统性红队实验属于研究；既有榜单成绩归模型，真实事故的新闻调查归行业。" },
-  { key: "tip", label: "教程", section: "技巧与观点", guide: "读者可以照着使用的方法、提示词、工具用法、工程实践复盘与技术讲解。重点是可复用的做法；单纯发布工具归产品，只有态度和预测而无做法归观点。", commentary: true },
-  { key: "opinion", label: "观点", section: "技巧与观点", guide: "重点是作者的解释、判断、主张、预测、评论或访谈观点。讨论市场不自动归行业，作者是名人不自动归观点。", commentary: true },
+  { key: "approval", label: "注册获批", section: "注册与获批", guide: "注册审批与获批：NMPA、FDA、CE 等监管机构的注册获批、创新与优先通道进入转出、审评公示、注册法规落地。发布新产品但还没获批归产品技术；获批后的集采中标归集采医保。" },
+  { key: "policy", label: "政策法规", section: "政策与法规", guide: "法规、规章、指导原则、强制性标准的发布与修订，分类目录调整，监管机构政策与人事。具体产品的获批归注册获批；集采与医保支付规则归集采医保。" },
+  { key: "procurement", label: "集采医保", section: "集采与支付", guide: "集中采购、接续采购、开标结果、医保支付、收费定价、医保目录与支付政策。集采政策文件本身若改变普遍规则，按影响面可归政策法规。" },
+  { key: "quality", label: "质量安全", section: "质量与安全", guide: "召回、飞行检查通报、警告信、监管处罚、不良事件与警戒信息。涉及具体产品的合规判定改变（如分类调整）归政策法规。" },
+  { key: "industry", label: "行业动态", section: "行业动态", guide: "已发生的公司经营、投融资并购、人事、合作、诉讼、业绩、产能与出海的商业动作。新闻由当事方发布、带有态度，也不因此变成观点。" },
+  { key: "tech", label: "产品技术", section: "产品与技术", guide: "新产品与新技术发布、重大产品更新、AI 医疗软件与平台进展。产品获批上市归注册获批；只有宣称和预测而无实际发布归观点解读。" },
+  { key: "research", label: "临床研究", section: "临床与观点", guide: "以临床试验结果、真实世界研究、学术发现为核心的研究与技术报告。产品发布时附带的临床数据归注册获批或产品技术。" },
+  { key: "opinion", label: "观点解读", section: "临床与观点", guide: "重点是作者的解释、判断、主张、预测、评论、访谈，以及法规实务与实操指南。讨论市场不自动归行业动态；作者是专家不自动归观点。", commentary: true },
 ] as const satisfies ReadonlyArray<{ key: string; label: string; feedLabel?: string; section: string; guide: string; commentary?: true }>;
 
 /**
@@ -24,72 +25,72 @@ export const CATEGORIES = [
  * category 是类别，tag 是标签，两者都对上才算；unit 接在数字后面。
  * 没有这样一类的行业设成 null，报头就不显示这个数。
  */
-export const RELEASE: { category: string; tag: string; unit: string } | null = { category: "ai-models", tag: "模型发布", unit: "个新模型" };
+export const RELEASE: { category: string; tag: string; unit: string } | null = { category: "approval", tag: "注册获批", unit: "项新获批" };
 
 /** 周报月报的总述可以直接写、不必在报道里找到出处的行业通用词（小写）。站名会自动算进去。 */
-export const PLAIN_TERMS: readonly string[] = ["ai", "api", "llm", "gpu", "agi", "ceo", "ipo"];
+export const PLAIN_TERMS: readonly string[] = ["nmpa", "fda", "ivd", "samd", "ce", "ct", "mri", "pet", "pcr", "ngs", "poct", "udi", "cdmo", "ra", "qa", "ai", "api", "ipo", "ceo"];
 
 /**
  * 内容理解一步给每篇资料判的“内容类型”（写在 prompts/content-understanding.md 里，改了类型要同步改那份提示词）。
  * 评分提示词（prompts/selection-score.md）按类型给五个维度不同的权重。
  */
-export const ITEM_TYPES = ["model_release", "product_launch", "tool_or_prompt", "research_paper", "industry_event", "opinion_analysis", "tutorial_explainer"] as const;
+export const ITEM_TYPES = ["regulatory_approval", "policy_payment", "recall_quality", "product_tech", "clinical_research", "industry_event", "opinion_analysis"] as const;
 
 // ── 标签词表 ────────────────────────────────────────────────────────────────────────────
 
 /** 每篇资料的第一个标签必须是这些“分类标签”之一。 */
 export const CATEGORY_TAGS = [
-  "产品更新", "模型发布", "论文/研究", "开源/仓库", "教程/实践", "现象/趋势", "大佬观点", "评测/基准", "安全/对齐", "行业动态", "政策/监管",
-  "非AI/通用工具", "其他",
+  "注册获批", "政策/法规", "集采/医保", "召回/质量安全", "行业动态", "产品/技术", "临床/研究", "观点/解读",
+  "出海/全球化", "法规实务", "展会/活动", "非医械内容", "其他",
 ] as const;
 
 /** 可选的主题标签。 */
 export const TOPIC_TAGS = [
-  "Agent", "编码", "推理", "多模态", "语音", "视频", "图像生成", "RAG", "端侧", "数据/训练", "搜索", "部署/工程", "开源生态", "具身智能", "MCP/工具调用",
+  "影像与超声", "IVD/体外诊断", "心血管与介入", "骨科与植入", "手术机器人", "AI医疗/SaMD", "家用器械", "眼科", "口腔",
+  "内窥镜", "监护与麻醉", "康复", "分子诊断/基因", "核心零部件", "CDMO/代工",
 ] as const;
 
 /** 可选的实体标签（公司、机构、平台）。 */
-export const ENTITY_TAGS = ["OpenAI", "Anthropic", "DeepSeek", "DeepMind", "Google", "Meta", "Microsoft", "xAI", "Hugging Face", "GitHub", "arXiv"] as const;
+export const ENTITY_TAGS = ["迈瑞医疗", "联影医疗", "微创医疗", "美敦力", "雅培", "强生", "西门子医疗", "GE医疗", "波士顿科学", "罗氏诊断", "NMPA", "FDA"] as const;
 
 /** 模型常写的近义词，统一成词表里的写法。 */
 export const TAG_SYNONYMS: Readonly<Record<string, string>> = {
-  "教程/玩法": "教程/实践", "技巧/最佳实践": "教程/实践", "合作/生态": "行业动态", "融资/收购": "行业动态", "公司动态": "行业动态",
-  合作: "行业动态", 生态: "行业动态", 融资: "行业动态", 收购: "行业动态", 投资: "行业动态", 并购: "行业动态",
-  政策: "政策/监管", 监管: "政策/监管", 法规: "政策/监管", 安全: "安全/对齐", 对齐: "安全/对齐",
-  论文: "论文/研究", 研究: "论文/研究", paper: "论文/研究", papers: "论文/研究",
-  "open-source": "开源/仓库", 开源: "开源/仓库", 仓库: "开源/仓库", repo: "开源/仓库",
-  教程: "教程/实践", 玩法: "教程/实践", 指南: "教程/实践", 技巧: "教程/实践", 最佳实践: "教程/实践", 实践: "教程/实践",
-  产品: "产品更新", 更新: "产品更新", 发布: "模型发布", 模型: "模型发布", 趋势: "现象/趋势", 现象: "现象/趋势", 观点: "大佬观点",
-  视频生成: "视频", 非ai: "非AI/通用工具", "non-ai": "非AI/通用工具", 通用工具: "非AI/通用工具", 工程工具: "非AI/通用工具",
-  安全扫描: "非AI/通用工具", devops: "非AI/通用工具", 行业: "行业动态", 动态: "行业动态",
+  获批: "注册获批", 批准: "注册获批", 注册: "注册获批", 审批: "注册获批",
+  政策: "政策/法规", 法规: "政策/法规", 监管: "政策/法规", 指导原则: "政策/法规", 标准: "政策/法规",
+  集采: "集采/医保", 招采: "集采/医保", 医保: "集采/医保", 带量采购: "集采/医保", 支付: "集采/医保", 降价: "集采/医保",
+  召回: "召回/质量安全", 飞检: "召回/质量安全", 飞行检查: "召回/质量安全", 处罚: "召回/质量安全", 警告信: "召回/质量安全", 不良事件: "召回/质量安全",
+  融资: "行业动态", 收购: "行业动态", 并购: "行业动态", 投资: "行业动态", 人事: "行业动态", 业绩: "行业动态", 合作: "行业动态",
+  新品: "产品/技术", 发布: "产品/技术", 技术: "产品/技术", 产品: "产品/技术",
+  临床: "临床/研究", 研究: "临床/研究", 论文: "临床/研究", 试验: "临床/研究",
+  观点: "观点/解读", 解读: "观点/解读", 分析: "观点/解读", 访谈: "观点/解读", 实操: "法规实务", 指南: "法规实务",
+  出海: "出海/全球化", 海外: "出海/全球化", 国际化: "出海/全球化", 展会: "展会/活动", 会议: "展会/活动",
+  "非医械": "非医械内容", "无关": "非医械内容",
 };
 
-// ── 公司与主体 ──────────────────────────────────────────────────────────────────────────
+// ── 公司与机构 ──────────────────────────────────────────────────────────────────────────
 
-/**
- * 公司主题：id → 显示名、卡片上显示的标签（null 表示只用 entity:<id> 归类）、别名。
- * aliases 给结构抽取模型看；otherNames 是公司自己的其他称呼（官方账号名、子品牌），
- * 把事实的主体对到发布方时也认它们。
- */
+/** 公司与机构主题：id → 显示名、卡片上显示的标签（null 表示只用 entity:<id> 归类）、别名。 */
 export const ENTITIES: Record<string, { name: string; displayTag: string | null; aliases: string[]; otherNames?: string[] }> = {
-  "world-labs": { name: "World Labs", displayTag: null, aliases: ["World Labs"] },
-  "thinking-machines": { name: "Thinking Machines Lab", displayTag: null, aliases: ["Thinking Machines"] },
-  amd: { name: "AMD", displayTag: null, aliases: ["AMD", "Advanced Micro Devices"] },
-  openai: { name: "OpenAI", displayTag: "OpenAI", aliases: ["OpenAI", "ChatGPT", "Sora", "Codex", "GPT"], otherNames: ["OpenAI Developers"] },
-  anthropic: { name: "Anthropic", displayTag: "Anthropic", aliases: ["Anthropic", "Claude"], otherNames: ["Claude Code"] },
-  google: { name: "Google", displayTag: "Google", aliases: ["Google", "DeepMind", "Gemini", "谷歌"], otherNames: ["Google DeepMind", "Google Research", "Google AI", "Google Labs", "Google Cloud"] },
-  deepseek: { name: "DeepSeek", displayTag: "DeepSeek", aliases: ["DeepSeek", "深度求索"] },
-  qwen: { name: "千问 Qwen", displayTag: null, aliases: ["Qwen", "通义", "阿里"], otherNames: ["通义千问", "千问", "千问APP", "Qwen Team", "通义实验室", "阿里巴巴", "Alibaba", "阿里云", "Alibaba Cloud"] },
-  kimi: { name: "Kimi / 月之暗面", displayTag: null, aliases: ["Kimi", "月之暗面", "Moonshot"], otherNames: ["Moonshot AI"] },
-  minimax: { name: "MiniMax", displayTag: null, aliases: ["MiniMax", "海螺"], otherNames: ["稀宇科技"] },
-  zhipu: { name: "智谱 GLM", displayTag: null, aliases: ["智谱", "GLM", "Z.ai"], otherNames: ["智谱AI", "Zhipu", "Zhipu AI"] },
-  xai: { name: "xAI", displayTag: "xAI", aliases: ["xAI", "Grok"], otherNames: ["SpaceXAI"] },
-  meta: { name: "Meta", displayTag: "Meta", aliases: ["Meta", "Llama"], otherNames: ["Meta AI", "AI at Meta"] },
-  microsoft: { name: "Microsoft", displayTag: "Microsoft", aliases: ["Microsoft", "微软", "Copilot"], otherNames: ["Microsoft Research", "Microsoft AI"] },
-  nvidia: { name: "NVIDIA", displayTag: null, aliases: ["NVIDIA", "英伟达"] },
-  "hugging-face": { name: "Hugging Face", displayTag: "Hugging Face", aliases: ["Hugging Face"], otherNames: ["HuggingFace"] },
-  cursor: { name: "Cursor", displayTag: null, aliases: ["Cursor", "Anysphere"] },
-  openrouter: { name: "OpenRouter", displayTag: null, aliases: ["OpenRouter"] },
+  mindray: { name: "迈瑞医疗", displayTag: "迈瑞医疗", aliases: ["迈瑞", "Mindray"] },
+  "united-imaging": { name: "联影医疗", displayTag: "联影医疗", aliases: ["联影", "United Imaging"] },
+  microport: { name: "微创医疗", displayTag: "微创医疗", aliases: ["微创", "MicroPort", "微创医疗科学"] },
+  lepu: { name: "乐普医疗", displayTag: null, aliases: ["乐普", "Lepu"] },
+  yuyue: { name: "鱼跃医疗", displayTag: null, aliases: ["鱼跃", "Yuwell"] },
+  medtronic: { name: "美敦力", displayTag: "美敦力", aliases: ["美敦力", "Medtronic"] },
+  abbott: { name: "雅培", displayTag: "雅培", aliases: ["雅培", "Abbott"] },
+  jnj: { name: "强生医疗", displayTag: "强生", aliases: ["强生", "Johnson & Johnson", "Ethicon", "DePuy"] },
+  stryker: { name: "史赛克", displayTag: null, aliases: ["史赛克", "Stryker"] },
+  "boston-scientific": { name: "波士顿科学", displayTag: "波士顿科学", aliases: ["波士顿科学", "Boston Scientific"] },
+  "siemens-healthineers": { name: "西门子医疗", displayTag: "西门子医疗", aliases: ["西门子医疗", "Siemens Healthineers"] },
+  "ge-healthcare": { name: "GE 医疗", displayTag: "GE医疗", aliases: ["GE 医疗", "GE HealthCare"] },
+  philips: { name: "飞利浦医疗", displayTag: null, aliases: ["飞利浦医疗", "Philips Healthcare"] },
+  "roche-diagnostics": { name: "罗氏诊断", displayTag: "罗氏诊断", aliases: ["罗氏诊断", "Roche Diagnostics"] },
+  danaher: { name: "丹纳赫", displayTag: null, aliases: ["丹纳赫", "Danaher", "Cepheid", "Beckman Coulter"] },
+  "thermo-fisher": { name: "赛默飞", displayTag: null, aliases: ["赛默飞", "Thermo Fisher"] },
+  nmpa: { name: "国家药监局", displayTag: "NMPA", aliases: ["国家药监局", "NMPA", "国家药品监督管理局"] },
+  cmde: { name: "器审中心", displayTag: null, aliases: ["器审中心", "CMDE", "医疗器械技术审评中心"] },
+  nhsa: { name: "国家医保局", displayTag: null, aliases: ["国家医保局", "医保局", "NHSA"] },
+  fda: { name: "美国 FDA", displayTag: "FDA", aliases: ["FDA", "美国食品药品监督管理局"] },
 };
 
 /**
@@ -97,57 +98,49 @@ export const ENTITIES: Record<string, { name: string; displayTag: string | null;
  * 行业没有这个问题时可以留空数组。
  */
 export const IDENTITY_LEXICON: ReadonlyArray<{ id: string; name: string; patterns: RegExp[] }> = [
-  { id: "openai", name: "OpenAI", patterns: [/openai|chatgpt|\bgpt-?[o\d]|\bsora\b|\bcodex\b/i] },
-  { id: "anthropic", name: "Anthropic", patterns: [/anthropic|\bclaude\b/i, /\b(?:opus|sonnet|haiku)\s*\d+(?:[.\-]\d+)*\b/i, /\bfable\s*\d+(?:[.\-]\d+)*\b|\bmythos\b/i] },
-  { id: "google", name: "Google / Gemini", patterns: [/google|deepmind|\bgemini\b|notebooklm|\bveo\s?\d|\bAlphaFold\b|\bAMIE\b/i] },
-  { id: "deepseek", name: "DeepSeek", patterns: [/deepseek|深度求索/i] },
-  { id: "xai", name: "xAI / Grok", patterns: [/\bxai\b|\bgrok\b/i] },
-  { id: "meta", name: "Meta / Llama", patterns: [/\bMeta\b/, /\bmeta\s?ai\b|\bllama\b/i] },
-  { id: "microsoft", name: "Microsoft / Copilot", patterns: [/microsoft|copilot|微软/i] },
-  { id: "nvidia", name: "NVIDIA", patterns: [/nvidia|英伟达|\bnemotron\b|\bnemo\b|\bblackwell\b|\brubin(?:\s+ultra)?\b|\bcuda\b/i] },
-  { id: "qwen", name: "千问 Qwen", patterns: [/\bqwen|通义|千问/i] },
-  { id: "hugging-face", name: "Hugging Face", patterns: [/hugging\s?face/i] },
-  { id: "cursor", name: "Cursor", patterns: [/\bCursor\b/] },
-  { id: "kimi", name: "Kimi / 月之暗面", patterns: [/\bkimi\b|月之暗面|\bmoonshot\s?ai\b/i] },
-  { id: "openrouter", name: "OpenRouter", patterns: [/openrouter/i] },
-  { id: "minimax", name: "MiniMax", patterns: [/minimax/i] },
-  { id: "zhipu", name: "智谱 GLM", patterns: [/智谱|\bglm-?[4-9]/i] },
-  { id: "hunyuan", name: "腾讯混元", patterns: [/混元|hunyuan/i] },
-  { id: "doubao", name: "字节豆包", patterns: [/豆包|doubao|字节跳动|bytedance/i] },
-  { id: "mistral", name: "Mistral", patterns: [/mistral/i] },
-  { id: "perplexity", name: "Perplexity", patterns: [/\bPerplexity\b/] },
-  { id: "runway", name: "Runway", patterns: [/\brunway\b/i] },
-  { id: "suno", name: "Suno", patterns: [/\bsuno\b/i] },
-  { id: "midjourney", name: "Midjourney", patterns: [/midjourney/i] },
-  { id: "stability-ai", name: "Stability AI", patterns: [/stability\s?ai/i] },
-  { id: "elevenlabs", name: "ElevenLabs", patterns: [/eleven\s?labs/i] },
-  { id: "vllm", name: "vLLM", patterns: [/\bvllm\b/i] },
-  { id: "ollama", name: "Ollama", patterns: [/\bollama\b/i] },
-  { id: "windsurf", name: "Windsurf", patterns: [/windsurf/i] },
-  { id: "devin", name: "Devin", patterns: [/\bdevin\b/i] },
-  { id: "manus", name: "Manus", patterns: [/\bmanus\b/i] },
-  { id: "apple", name: "Apple AI", patterns: [/\bapple\s?(intelligence|silicon|ai)\b|苹果(智能|\s?AI)/i] },
-  { id: "amazon", name: "Amazon / AWS", patterns: [/amazon|\baws\b|亚马逊/i] },
-  { id: "baidu", name: "百度文心", patterns: [/百度|baidu|文心|\bernie\s?bot\b/i] },
+  { id: "mindray", name: "迈瑞医疗", patterns: [/迈瑞|mindray/i] },
+  { id: "united-imaging", name: "联影医疗", patterns: [/联影|united\s?imaging/i] },
+  { id: "microport", name: "微创医疗", patterns: [/微创|microport/i] },
+  { id: "lepu", name: "乐普医疗", patterns: [/乐普|lepu/i] },
+  { id: "yuyue", name: "鱼跃医疗", patterns: [/鱼跃|yuwell/i] },
+  { id: "medtronic", name: "美敦力", patterns: [/美敦力|medtronic|\bHugo\b/i] },
+  { id: "abbott", name: "雅培", patterns: [/雅培|abbott|FreeStyle\s?Libre|\bAlinity\b|\bPanbio\b/i] },
+  { id: "jnj", name: "强生医疗", patterns: [/强生|johnson\s?&\s?johnson|\bJ&J\b|ethicon|depuy|\bAbiomed\b|\bShockwave\b/i] },
+  { id: "stryker", name: "史赛克", patterns: [/史赛克|stryker|\bMako\b/i] },
+  { id: "boston-scientific", name: "波士顿科学", patterns: [/波士顿科学|boston\s?scientific|\bWatchman\b|\bFarapulse\b/i] },
+  { id: "siemens-healthineers", name: "西门子医疗", patterns: [/西门子医疗|siemens\s?healthineers/i] },
+  { id: "ge-healthcare", name: "GE 医疗", patterns: [/ge\s?医疗|ge\s?healthcare/i] },
+  { id: "philips", name: "飞利浦医疗", patterns: [/飞利浦|philips/i] },
+  { id: "roche-diagnostics", name: "罗氏诊断", patterns: [/罗氏|roche|\bcobas\b/i] },
+  { id: "danaher", name: "丹纳赫", patterns: [/丹纳赫|danaher|cepheid|beckman\s?coulter/i] },
+  { id: "thermo-fisher", name: "赛默飞", patterns: [/赛默飞|thermo\s?fisher/i] },
+  { id: "nmpa", name: "国家药监局", patterns: [/国家药监局|药监局|nmpa|国家药品监督管理局/i] },
+  { id: "cmde", name: "器审中心", patterns: [/器审中心|cmde|医疗器械技术审评中心|器审/i] },
+  { id: "nhsa", name: "国家医保局", patterns: [/国家医保局|医保局|nhsa/i] },
+  { id: "fda", name: "美国 FDA", patterns: [/\bfda\b|美国食品药品监督管理局/i] },
 ];
 
-/** 这些域名上的文章，发布方就是对应的公司（托管平台如 GitHub、arXiv 不算）。 */
+/** 这些域名上的文章，发布方就是对应的公司（托管平台如官媒门户不算）。 */
 export const PUBLISHER_DOMAINS: ReadonlyArray<{ entityId: string; domains: readonly string[] }> = [
-  { entityId: "openai", domains: ["openai.com"] },
-  { entityId: "anthropic", domains: ["anthropic.com", "claude.com"] },
-  { entityId: "google", domains: ["deepmind.google", "ai.google", "blog.google"] },
-  { entityId: "deepseek", domains: ["deepseek.com"] },
-  { entityId: "xai", domains: ["x.ai"] },
-  { entityId: "meta", domains: ["ai.meta.com"] },
-  { entityId: "microsoft", domains: ["microsoft.com"] },
-  { entityId: "nvidia", domains: ["nvidia.com"] },
-  { entityId: "qwen", domains: ["qwen.ai"] },
-  { entityId: "cursor", domains: ["cursor.com"] },
-  { entityId: "openrouter", domains: ["openrouter.ai"] },
+  { entityId: "nmpa", domains: ["nmpa.gov.cn"] },
+  { entityId: "cmde", domains: ["cmde.org.cn"] },
+  { entityId: "nhsa", domains: ["nhsa.gov.cn"] },
+  { entityId: "fda", domains: ["fda.gov"] },
+  { entityId: "medtronic", domains: ["medtronic.com", "news.medtronic.com"] },
+  { entityId: "abbott", domains: ["abbott.com", "media.abbott.com"] },
+  { entityId: "jnj", domains: ["jnj.com"] },
+  { entityId: "boston-scientific", domains: ["bostonscientific.com", "news.bostonscientific.com"] },
+  { entityId: "siemens-healthineers", domains: ["siemens-healthineers.com", "press.siemens-healthineers.com"] },
+  { entityId: "ge-healthcare", domains: ["gehealthcare.com"] },
+  { entityId: "philips", domains: ["philips.com", "philips.com.cn"] },
+  { entityId: "mindray", domains: ["mindray.com"] },
+  { entityId: "united-imaging", domains: ["united-imaging.com"] },
+  { entityId: "microport", domains: ["microport.com"] },
+  { entityId: "roche-diagnostics", domains: ["roche.com", "diagnostics.roche.com"] },
 ];
 
 /** 原文里的这些写法也算提到了对应公司。 */
 export const IDENTITY_CONTEXT_ALIASES: ReadonlyArray<{ entityId: string; pattern: RegExp }> = [
-  { entityId: "meta", pattern: /@AIatMeta\b/i },
-  { entityId: "zhipu", pattern: /\bZhipu(?:\s+AI\b|['’]s\b)/i },
+  { entityId: "ge-healthcare", pattern: /\bGE\s?HealthCare\b/i },
+  { entityId: "jnj", pattern: /\bJohnson(?:\s?&\s?|\s+and\s+)Johnson\b/i },
 ];

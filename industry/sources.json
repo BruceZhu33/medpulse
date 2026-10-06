@@ -1,367 +1,903 @@
 {
-  "$comment": "示范信源：首次启动时导入（scripts/seed.ts），已存在的不会被覆盖。之后在后台“信源”里新建、修改和暂停。字段说明见 docs/customize.md。",
+  "$comment": "医疗器械/IVD 行业示范信源，首次启动时导入（scripts/seed.ts），已存在的不会被覆盖。标注：〔需试抓〕= web_list 选择器或 json_list 字段路径是合理推测，上线前在后台“信源”页点一次试抓校准；〔需补 ghid〕= 公众号信源要在后台补真实 ghid 后才能抓；〔需 SocialData key〕= X 信源默认只在配置 key 后计费运行。候选扩充：AuntMinnie（影像）、PMDA（日本）、TGA（澳洲）、上海阳光医药采购网/高值耗材联采办（集采）、器审中心分类界定结果、中检院标准发布。",
   "sources": [
     {
-      "id": "rss-openai-news",
-      "name": "OpenAI News",
-      "kind": "rss",
+      "id": "nmpa-ggtt",
+      "name": "国家药监局·器械公告通告",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://openai.com/news/rss.xml",
+        "url": "https://www.nmpa.gov.cn/directory/web/nmpa/ylqx/ggtt/",
+        "itemSelector": "li",
+        "linkSelector": "a",
+        "titleSelector": "a",
         "_aihot": {
-          "initialBackfillLimit": 8
+          "initialBackfillLimit": 5
         }
       },
       "tier": "T1",
-      "owner_entity_id": "openai",
+      "owner_entity_id": "nmpa",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 60,
       "tags": [
-        "官方"
+        "官方",
+        "监管"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-google-deepmind",
-      "name": "Google DeepMind",
-      "kind": "rss",
+      "id": "nmpa-zcsp",
+      "name": "国家药监局·器械注册审批公示",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://deepmind.google/blog/rss.xml",
+        "url": "https://www.nmpa.gov.cn/directory/web/nmpa/ylqx/zcsp/",
+        "itemSelector": "li",
+        "linkSelector": "a",
+        "titleSelector": "a",
         "_aihot": {
-          "initialBackfillLimit": 8
+          "initialBackfillLimit": 5
         }
       },
       "tier": "T1",
-      "owner_entity_id": "google",
+      "owner_entity_id": "nmpa",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 60,
       "tags": [
-        "官方"
+        "官方",
+        "注册"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-google-research",
-      "name": "Google Research",
-      "kind": "rss",
+      "id": "cmde-psp",
+      "name": "器审中心·审评进度公示",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://research.google/blog/rss/",
+        "url": "https://www.cmde.org.cn/xinxifabu/psp/",
+        "itemSelector": "li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "cmde",
+      "participation_mode": "editorial",
+      "interval_minutes": 90,
+      "tags": [
+        "官方",
+        "审评"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "nhsa-notice",
+      "name": "国家医保局·通知公告",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.nhsa.gov.cn/art/",
+        "itemSelector": "li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "nhsa",
+      "participation_mode": "editorial",
+      "interval_minutes": 90,
+      "tags": [
+        "官方",
+        "集采"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "fda-approved",
+      "name": "FDA·Recently-Approved Devices",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.fda.gov/medical-devices/device-approvals-denials-and-clearances/recently-approved-devices",
+        "itemSelector": "article",
+        "linkSelector": "a",
+        "titleSelector": "h2",
         "_aihot": {
           "initialBackfillLimit": 8
         }
       },
       "tier": "T1",
-      "owner_entity_id": "google",
+      "owner_entity_id": "fda",
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
         "官方",
-        "研究"
+        "注册"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-hugging-face",
-      "name": "Hugging Face Blog",
-      "kind": "rss",
+      "id": "fda-recalls",
+      "name": "FDA·Medical Device Recalls",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://huggingface.co/blog/feed.xml",
+        "url": "https://www.fda.gov/medical-devices/medical-device-recalls",
+        "itemSelector": "article",
+        "linkSelector": "a",
+        "titleSelector": "h2",
         "_aihot": {
           "initialBackfillLimit": 8
         }
       },
       "tier": "T1",
-      "owner_entity_id": "hugging-face",
+      "owner_entity_id": "fda",
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
         "官方",
-        "开源"
+        "召回"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-microsoft-research",
-      "name": "Microsoft Research",
-      "kind": "rss",
+      "id": "eu-mdr-news",
+      "name": "欧盟委员会·医疗器械（MDR）动态",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://www.microsoft.com/en-us/research/feed/",
+        "url": "https://health.ec.europa.eu/medical-devices_en",
+        "itemSelector": "article",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3",
         "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "owner_entity_id": "microsoft",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "研究"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-nvidia-blog",
-      "name": "NVIDIA Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://blogs.nvidia.com/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "owner_entity_id": "nvidia",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-aws-ml",
-      "name": "AWS Machine Learning Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://aws.amazon.com/blogs/machine-learning/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
+          "initialBackfillLimit": 5
         }
       },
       "tier": "T1",
       "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 240,
       "tags": [
         "官方",
-        "教程"
+        "欧盟"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-github-ai",
-      "name": "GitHub Blog · AI & ML",
-      "kind": "rss",
+      "id": "mhra-device-alerts",
+      "name": "英国 MHRA·器械安全警示",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://github.blog/ai-and-ml/feed/",
+        "url": "https://www.gov.uk/drug-device-alerts",
+        "itemSelector": "li, article",
+        "linkSelector": "a",
+        "titleSelector": "a, h2",
+        "allowUrlPrefixes": [
+          "https://www.gov.uk/drug-device-alert/"
+        ],
         "_aihot": {
-          "initialBackfillLimit": 8
+          "initialBackfillLimit": 5
         }
       },
       "tier": "T1",
       "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 240,
       "tags": [
+        "官方",
+        "召回"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "openfda-510k",
+      "name": "openFDA·510(k) 数据库",
+      "kind": "json_list",
+      "config": {
+        "url": "https://api.fda.gov/device/510k.json?limit=25&sort=decision_date:desc",
+        "itemsPath": "results",
+        "titlePaths": [
+          "device_name"
+        ],
+        "summaryPaths": [
+          "applicant"
+        ],
+        "authorPaths": [
+          "applicant"
+        ],
+        "publishedAtPath": "decision_date",
+        "externalIdPath": "k_number",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "fda",
+      "participation_mode": "isolated",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "注册",
+        "需试抓"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "openfda-recall",
+      "name": "openFDA·器械召回执法报告",
+      "kind": "json_list",
+      "config": {
+        "url": "https://api.fda.gov/device/recall.json?limit=25&sort=report_date:desc",
+        "itemsPath": "results",
+        "titlePaths": [
+          "product_description"
+        ],
+        "summaryPaths": [
+          "reason_for_recall"
+        ],
+        "authorPaths": [
+          "recalling_firm"
+        ],
+        "publishedAtPath": "report_date",
+        "externalIdPath": "recall_number",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "fda",
+      "participation_mode": "isolated",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "召回",
+        "需试抓"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "medtronic-news",
+      "name": "Medtronic Newsroom",
+      "kind": "web_list",
+      "config": {
+        "url": "https://news.medtronic.com/",
+        "itemSelector": "article, li",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3, a",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "medtronic",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "厂商",
         "官方"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-mistral",
-      "name": "Mistral AI",
-      "kind": "rss",
+      "id": "abbott-news",
+      "name": "Abbott Newsroom",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://mistral.ai/news/rss",
+        "url": "https://media.abbott.com/",
+        "itemSelector": "article, li",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3, a",
         "_aihot": {
-          "initialBackfillLimit": 8
+          "initialBackfillLimit": 5
         }
       },
       "tier": "T1",
-      "owner_entity_id": null,
+      "owner_entity_id": "abbott",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 180,
       "tags": [
+        "厂商",
         "官方"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-bair",
-      "name": "Berkeley AI Research",
+      "id": "ge-healthcare-news",
+      "name": "GE HealthCare Newsroom",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.gehealthcare.com/about/newsroom",
+        "itemSelector": "article, li",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3, a",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "ge-healthcare",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "厂商",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "siemens-healthineers-news",
+      "name": "Siemens Healthineers Press",
+      "kind": "web_list",
+      "config": {
+        "url": "https://press.siemens-healthineers.com/global-en/press-releases",
+        "itemSelector": "article, li",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3, a",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "siemens-healthineers",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "厂商",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "philips-news",
+      "name": "Philips News Center",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.philips.com/newscenter/corporate",
+        "itemSelector": "article, li",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3, a",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "philips",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "厂商",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "boston-scientific-news",
+      "name": "Boston Scientific News",
+      "kind": "web_list",
+      "config": {
+        "url": "https://news.bostonscientific.com/",
+        "itemSelector": "article, li",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3, a",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "boston-scientific",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "厂商",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "mindray-news",
+      "name": "迈瑞医疗·新闻",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.mindray.com/en/news.html",
+        "itemSelector": "article, li",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3, a",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "mindray",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "厂商",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "united-imaging-news",
+      "name": "联影医疗·Newsroom",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.united-imaging.com/en/newsroom/",
+        "itemSelector": "article, li",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3, a",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "united-imaging",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "厂商",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-medtech-dive",
+      "name": "MedTech Dive",
       "kind": "rss",
       "config": {
-        "feedUrl": "https://bair.berkeley.edu/blog/feed.xml",
+        "feedUrl": "https://www.medtechdive.com/feeds/news/",
         "_aihot": {
           "initialBackfillLimit": 8
         }
       },
-      "tier": "T1",
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-massdevice",
+      "name": "MassDevice",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.massdevice.com/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-meddesign-outsourcing",
+      "name": "Medical Design & Outsourcing",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.meddesignoutsourcing.com/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 90,
+      "tags": [
+        "媒体",
+        "设计与制造"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-drugdeliverybusiness",
+      "name": "Drug Delivery Business",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.drugdeliverybusiness.com/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体",
+        "给药器械"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-mpo-mag",
+      "name": "Medical Product Outsourcing",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.mpo-mag.com/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-mddionline",
+      "name": "MD+DI",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.mddionline.com/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-radiologybusiness",
+      "name": "Radiology Business",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.radiologybusiness.com/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体",
+        "影像"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-360dx",
+      "name": "360Dx",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.360dx.com/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 90,
+      "tags": [
+        "媒体",
+        "IVD"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-medgadget",
+      "name": "Medgadget",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.medgadget.com/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体",
+        "新品"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-fierce-medtech",
+      "name": "Fierce Medtech",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.fiercebiotech.com/medtech/rss/xml",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 90,
+      "tags": [
+        "媒体",
+        "需试抓"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "vcbeat-device",
+      "name": "动脉网",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.vcbeat.top/",
+        "itemSelector": "article, li",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3, a",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体",
+        "投融资"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "ivd-cn",
+      "name": "体外诊断网",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.ivd.cn/",
+        "itemSelector": "article, li",
+        "linkSelector": "a",
+        "titleSelector": "h2, h3, a",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体",
+        "IVD"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "mp-cmde",
+      "name": "中国器审（公众号）",
+      "kind": "mp_account",
+      "config": {
+        "ghid": "TODO-ghid-cmde",
+        "nickname": "中国器审"
+      },
+      "tier": "T1_5",
+      "owner_entity_id": "cmde",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "公众号",
+        "需补ghid"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "mp-qixinzhijia",
+      "name": "器械之家（公众号）",
+      "kind": "mp_account",
+      "config": {
+        "ghid": "TODO-ghid-qixinzhijia",
+        "nickname": "器械之家"
+      },
+      "tier": "T2",
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 180,
       "tags": [
-        "研究"
+        "公众号",
+        "需补ghid"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-the-verge-ai",
-      "name": "The Verge · AI",
-      "kind": "rss",
+      "id": "mp-saibailan-qixie",
+      "name": "赛柏蓝器械（公众号）",
+      "kind": "mp_account",
       "config": {
-        "feedUrl": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-techcrunch-ai",
-      "name": "TechCrunch · AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://techcrunch.com/category/artificial-intelligence/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-ars-technica-ai",
-      "name": "Ars Technica · AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://arstechnica.com/ai/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-mit-tech-review-ai",
-      "name": "MIT Technology Review · AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-the-decoder",
-      "name": "The Decoder",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://the-decoder.com/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-simon-willison",
-      "name": "Simon Willison",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://simonwillison.net/atom/everything/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "个人"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-import-ai",
-      "name": "Import AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://importai.substack.com/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "ghid": "TODO-ghid-saibailan-qixie",
+        "nickname": "赛柏蓝器械"
       },
       "tier": "T2",
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 180,
       "tags": [
-        "个人",
-        "周刊"
+        "公众号",
+        "需补ghid"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-latent-space",
-      "name": "Latent Space",
-      "kind": "rss",
+      "id": "mp-ivdnet",
+      "name": "体外诊断网（公众号）",
+      "kind": "mp_account",
       "config": {
-        "feedUrl": "https://www.latent.space/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "ghid": "TODO-ghid-ivdnet",
+        "nickname": "体外诊断网"
       },
       "tier": "T2",
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 180,
       "tags": [
-        "个人"
+        "公众号",
+        "IVD",
+        "需补ghid"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "mp-medtrend",
+      "name": "MedTrend 医趋势（公众号）",
+      "kind": "mp_account",
+      "config": {
+        "ghid": "TODO-ghid-medtrend",
+        "nickname": "MedTrend医趋势"
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "公众号",
+        "需补ghid"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "mp-eshare",
+      "name": "Eshare医械汇（公众号）",
+      "kind": "mp_account",
+      "config": {
+        "ghid": "TODO-ghid-eshare",
+        "nickname": "Eshare医械汇"
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "公众号",
+        "需补ghid"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "x-fda-device",
+      "name": "X·@FDAdevice",
+      "kind": "x_search",
+      "config": {
+        "query": "from:FDAdevice -filter:replies"
+      },
+      "tier": "T1_5",
+      "owner_entity_id": "fda",
+      "participation_mode": "hot_signal",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "热度信号",
+        "需SocialData"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "x-us-fda",
+      "name": "X·@US_FDA",
+      "kind": "x_search",
+      "config": {
+        "query": "from:US_FDA (device OR medical) -filter:replies"
+      },
+      "tier": "T1_5",
+      "owner_entity_id": "fda",
+      "participation_mode": "hot_signal",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "热度信号",
+        "需SocialData"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "x-massdevice",
+      "name": "X·@MassDevice",
+      "kind": "x_search",
+      "config": {
+        "query": "from:MassDevice -filter:replies"
+      },
+      "tier": "T2",
+      "owner_entity_id": null,
+      "participation_mode": "hot_signal",
+      "interval_minutes": 180,
+      "tags": [
+        "媒体",
+        "热度信号",
+        "需SocialData"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "x-medtronic",
+      "name": "X·@Medtronic",
+      "kind": "x_search",
+      "config": {
+        "query": "from:Medtronic -filter:replies"
+      },
+      "tier": "T1_5",
+      "owner_entity_id": "medtronic",
+      "participation_mode": "hot_signal",
+      "interval_minutes": 180,
+      "tags": [
+        "厂商",
+        "热度信号",
+        "需SocialData"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
